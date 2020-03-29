@@ -144,19 +144,18 @@ Mounts the log file from coduo and its application files.
 
 ### Etter launch
 
-- coduomaps (filer laster ikke)
-- csgo (starter ikke)
-- stats.bia.no (white page of death)
-- old.bia.no (http istedenfor https på stilark tipper jeg)
+- [ ] csgo (starter ikke)
+- [x] coduomaps (filer laster ikke)
+- [x] stats.bia.no (white page of death)
+- [x] old.bia.no (http istedenfor https på stilark tipper jeg)
 
-
-- [ ] Test nedlasting av maps i coduo (test også nedlasting av config) - https://stackoverflow.com/questions/25789173/nginx-serve-only-specific-file-types-in-all-directories
 - [ ] ultrastats crontab `0 5 * * * /home/bia/ultrastats/ultrastats-0.3.16/src/contrib/bia_runparser.sh >> /tmp/ultrastats.log 2>&1`
 - [ ] coduo crontab restart
 - [ ] Se om noe fra matilda.fuzzy76.net/~fuzzy76/ skal over
-- [ ] Test serveren med en ren ip-request
 - [ ] crontab certbot renew
-- [ ] git commit og push
+- [x] Test nedlasting av maps i coduo (test også nedlasting av config)
+- [x] Test serveren med en ren ip-request
+- [x] git commit og push
 
 
 ---
