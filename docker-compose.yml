@@ -81,11 +81,12 @@ services:
   mysql:
     command: --default-authentication-plugin=mysql_native_password
     env_file: ./data_env/mysql.env
-    image: mysql
+    image: mysql:5.6
     restart: unless-stopped
     volumes:
       - "mysql_data:/var/lib/mysql"
       - "./data_seeded/mysql/ultrastats.sql.gz:/docker-entrypoint-initdb.d/ultrastats.sql.gz"
+      - "./data_configs/my.cnf:/etc/mysql/conf.d/custom.cnf"
 
   nginx:
     depends_on:
@@ -117,7 +118,7 @@ services:
   ultrastats:
     depends_on: 
       - mysql
-    image: php:5.6-apache
+    image: php:5.3-apache
     restart: unless-stopped
     volumes:
       - "./data_seeded/coduo/BrothersInArms_mod/games_mp.log:/games_mp.log"
@@ -132,4 +133,3 @@ volumes:
   nginx_www_biastats:
   nginx_www_chat:
   nginx_www_matilda:
-  
