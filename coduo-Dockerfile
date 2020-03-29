@@ -1,0 +1,10 @@
+FROM --platform=i386 debian:stable-slim
+RUN apt-get update && apt-get install -y libstdc++5
+CMD mkdir /coduo
+EXPOSE 28960/tcp
+EXPOSE 20500/udp
+EXPOSE 20510/udp
+EXPOSE 20600/udp
+EXPOSE 20610/udp
+EXPOSE 28960/udp
+ENTRYPOINT ["/coduo/start.sh"]

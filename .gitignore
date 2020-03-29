@@ -1,0 +1,4 @@
+.vscode/
+data_env/*.env
+data_seeded/*/*
+

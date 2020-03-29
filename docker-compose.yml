@@ -1,0 +1,135 @@
+version: "3.3"
+services:
+
+  bitlbee:
+    image: mbologna/docker-bitlbee
+    restart: unless-stopped
+    volumes:
+      - "./data_configs/bitlbee:/usr/local/etc/bitlbee"
+      - "bitlbee_data:/var/lib/bitlbee"
+
+  certbot:
+    depends_on:
+      - nginx
+    image: certbot/certbot
+    volumes:
+      - "./data_seeded/bia_old/:/var/www/bia_old/"
+      - "certbot_certs/:/etc/letsencrypt/"
+      - "certbot_varlib:/var/lib/letsencrypt"
+      - "nginx_www_chat:/var/www/chat/"
+      - "nginx_www_matilda:/var/www/matilda/"
+      - "nginx_www_biastats:/var/www/bia_stats/"
+
+  coduo:
+    build:
+      context: .
+      dockerfile: coduo-Dockerfile
+    container_name: coduo
+    ports:
+      - target: 28960
+        published: 28960
+        protocol: tcp
+        mode: host
+      - target: 20500
+        published: 20500
+        protocol: udp
+        mode: host
+      - target: 20510
+        published: 20510
+        protocol: udp
+        mode: host
+      - target: 20600
+        published: 20600
+        protocol: udp
+        mode: host
+      - target: 20610
+        published: 20610
+        protocol: udp
+        mode: host
+      - target: 28960
+        published: 28960
+        protocol: udp
+        mode: host
+    restart: unless-stopped
+    volumes:
+      - "./data_seeded/coduo:/coduo"
+
+  csgo:
+    env_file: ./data_env/csgo.env
+    image: kmallea/csgo:latest
+    ports:
+      - target: 27015
+        published: 27015
+        protocol: tcp
+        mode: host
+      - target: 27015
+        published: 27015
+        protocol: udp
+        mode: host
+      - target: 27020
+        published: 27020
+        protocol: tcp
+        mode: host
+      - target: 27020
+        published: 27020
+        protocol: udp
+        mode: host
+    restart: unless-stopped
+    volumes:
+      - "csgo_data:/home/steam/csgo"
+
+  mysql:
+    command: --default-authentication-plugin=mysql_native_password
+    env_file: ./data_env/mysql.env
+    image: mysql
+    restart: unless-stopped
+    volumes:
+      - "mysql_data:/var/lib/mysql"
+      - "./data_seeded/mysql/ultrastats.sql.gz:/docker-entrypoint-initdb.d/ultrastats.sql.gz"
+
+  nginx:
+    depends_on:
+      - thelounge
+      - ultrastats
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: unless-stopped
+    volumes:
+      - "./data_configs/nginx.conf:/etc/nginx/nginx.conf"
+      - "./data_seeded/coduo/:/var/www/coduo_maps/"
+      - "./data_seeded/bia_old/:/var/www/bia_old/"
+      - "certbot_certs:/etc/letsencrypt/"
+      - "nginx_www_chat:/var/www/chat/"
+      - "nginx_www_matilda:/var/www/matilda/"
+      - "nginx_www_biastats:/var/www/bia_stats/"
+
+  thelounge:
+    image: thelounge/thelounge:latest
+    ports:
+#      - "9000:9000" # web interface
+      - "113:9001" # ident
+    restart: unless-stopped
+    volumes:
+      - "./data_seeded/thelounge:/var/opt/thelounge"
+
+  ultrastats:
+    depends_on: 
+      - mysql
+    image: php:5.6-apache
+    restart: unless-stopped
+    volumes:
+      - "./data_seeded/coduo/BrothersInArms_mod/games_mp.log:/games_mp.log"
+      - "./data_seeded/ultrastats/src:/var/www/html"
+
+volumes:
+  bitlbee_data:
+  certbot_certs:
+  certbot_varlib:
+  csgo_data:
+  mysql_data:
+  nginx_www_biastats:
+  nginx_www_chat:
+  nginx_www_matilda:
+  
