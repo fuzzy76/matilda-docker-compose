@@ -90,9 +90,6 @@ services:
       - "./data_configs/my.cnf:/etc/mysql/conf.d/custom.cnf"
 
   nginx:
-    depends_on:
-      - thelounge
-      - ultrastats
     image: nginx:alpine
     ports:
       - "80:80"
