@@ -160,7 +160,10 @@ Mounts the log file from coduo and its application files.
 
 ---
 
+```
 docker-compose run certbot certonly --webroot -w /var/www/bia_old -d old.brothersinarms.no 
 docker-compose run certbot certonly --webroot -w /var/www/chat -d chat.fuzzy76.net
 docker-compose run certbot certonly --webroot -w /var/www/matilda -d matilda.fuzzy76.net
 docker-compose run certbot certonly --webroot -w /var/www/bia_stats -d stats.brothersinarms.no
+docker-compose restart nginx
+```
