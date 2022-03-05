@@ -22,16 +22,6 @@ to github because of their nature:
 `prod.env` is a docker environment file. Variables are:
   - `mysql_root_password`
 
-## Service: bitlbee
-
-Software: https://www.bitlbee.org/
-Docker image: https://hub.docker.com/r/mbologna/docker-bitlbee
-
-A proxy that connects to various chat services and exposes the connections as
-a personal IRC server.
-
-It has one volume for configuration and one for data.
-
 ## Service: certbot
 
 Software: https://certbot.eff.org
@@ -144,14 +134,14 @@ Mounts the log file from coduo and its application files.
 
 ### Etter launch
 
-- [ ] csgo (starter ikke)
+- [x] csgo (starter ikke)
 - [x] coduomaps (filer laster ikke)
 - [x] stats.bia.no (white page of death)
 - [x] old.bia.no (http istedenfor https på stilark tipper jeg)
 
 - [ ] ultrastats crontab `0 5 * * * /home/bia/ultrastats/ultrastats-0.3.16/src/contrib/bia_runparser.sh >> /tmp/ultrastats.log 2>&1`
 - [ ] coduo crontab restart
-- [ ] Se om noe fra matilda.fuzzy76.net/~fuzzy76/ skal over
+- [x] Se om noe fra matilda.fuzzy76.net/~fuzzy76/ skal over
 - [ ] crontab certbot renew
 - [x] Test nedlasting av maps i coduo (test også nedlasting av config)
 - [x] Test serveren med en ren ip-request
