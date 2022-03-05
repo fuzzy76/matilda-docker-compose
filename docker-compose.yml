@@ -1,13 +1,6 @@
 version: "3.3"
 services:
 
-  bitlbee:
-    image: mbologna/docker-bitlbee
-    restart: unless-stopped
-    volumes:
-      - "./data_configs/bitlbee:/usr/local/etc/bitlbee"
-      - "bitlbee_data:/var/lib/bitlbee"
-
   certbot:
     depends_on:
       - nginx
@@ -125,7 +118,6 @@ services:
       - "./data_seeded/ultrastats/src:/var/www/html"
 
 volumes:
-  bitlbee_data:
   certbot_certs:
   certbot_varlib:
   csgo_data:
