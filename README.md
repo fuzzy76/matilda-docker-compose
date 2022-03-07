@@ -92,6 +92,8 @@ introduction.
 Uses an env file for settings. Exposes porst 27015 and 27020 (both tcp and udp).
 Mounts a data_storage folder for game data.
 
+*Note*: The SourceMod plugin nextmap needs to be disabled manually for map voting to work!
+
 ## Service: mysql
 
 Software: https://www.mysql.com/ 
