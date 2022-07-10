@@ -84,15 +84,16 @@ cd /coduo/
 ## Service: csgo
 
 Software: http://blog.counter-strike.net/ 
-Docker image: https://github.com/kaimallea/csgo
+Docker image: https://github.com/CM2Walki/CSGO
 
 Gameserver for Counter Strike : Global Offensive. Should not need an
 introduction.
 
-Uses an env file for settings. Exposes porst 27015 and 27020 (both tcp and udp).
+Uses an env file for settings. Exposes ports 27015 and 27020 (both tcp and udp).
 Mounts a data_storage folder for game data.
 
-*Note*: The SourceMod plugin nextmap needs to be disabled manually for map voting to work!
+Notes:
+* Edit serverconfig and comment out weird defaults, ESL config and change the Steam group id.
 
 ## Service: mysql
 

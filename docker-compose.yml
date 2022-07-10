@@ -49,7 +49,7 @@ services:
 
   csgo:
     env_file: ./data_env/csgo.env
-    image: kmallea/csgo:latest
+    image: cm2network/csgo:latest
     ports:
       - target: 27015
         published: 27015
@@ -68,11 +68,6 @@ services:
         protocol: udp
         mode: host
     restart: unless-stopped
-    volumes:
-      - "csgo_data:/home/steam/csgo"
-      - "./data_configs/csgo.cfg:/home/steam/csgo/csgo/cfg/server.cfg"
-      - "./data_configs/csgo_gamemode_casual_server.cfg:/home/steam/csgo/csgo/cfg/gamemode_casual_server.cfg"
-      - "./data_configs/csgo_gamemode_competitive_server.cfg:/home/steam/csgo/csgo/cfg/gamemode_competitive_server.cfg"
 
   mysql:
     command: --default-authentication-plugin=mysql_native_password
@@ -120,7 +115,6 @@ services:
 volumes:
   certbot_certs:
   certbot_varlib:
-  csgo_data:
   mysql_data:
   nginx_www_biastats:
   nginx_www_chat:
