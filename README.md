@@ -142,8 +142,8 @@ Mounts the log file from coduo and its application files.
 - [x] stats.bia.no (white page of death)
 - [x] old.bia.no (http istedenfor https på stilark tipper jeg)
 
-- [ ] ultrastats crontab `0 5 * * * /home/bia/ultrastats/ultrastats-0.3.16/src/contrib/bia_runparser.sh >> /tmp/ultrastats.log 2>&1`
-- [ ] coduo crontab restart
+- [x] ultrastats crontab `0 5 * * * /home/bia/ultrastats/ultrastats-0.3.16/src/contrib/bia_runparser.sh >> /tmp/ultrastats.log 2>&1`
+- [x] coduo crontab restart
 - [x] Se om noe fra matilda.fuzzy76.net/~fuzzy76/ skal over
 - [ ] crontab certbot renew
 - [x] Test nedlasting av maps i coduo (test også nedlasting av config)
