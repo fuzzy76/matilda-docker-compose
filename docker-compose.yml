@@ -50,6 +50,10 @@ services:
   csgo:
     env_file: ./data_env/csgo.env
     image: cm2network/csgo:latest
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
     ports:
       - target: 27015
         published: 27015
