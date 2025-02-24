@@ -47,32 +47,6 @@ services:
     volumes:
       - "./data_seeded/coduo:/coduo"
 
-  csgo:
-    env_file: ./data_env/csgo.env
-    image: cm2network/csgo:latest
-    logging:
-      options:
-        max-size: "10m"
-        max-file: "3"
-    ports:
-      - target: 27015
-        published: 27015
-        protocol: tcp
-        mode: host
-      - target: 27015
-        published: 27015
-        protocol: udp
-        mode: host
-      - target: 27020
-        published: 27020
-        protocol: tcp
-        mode: host
-      - target: 27020
-        published: 27020
-        protocol: udp
-        mode: host
-    restart: unless-stopped
-
   mysql:
     command: --default-authentication-plugin=mysql_native_password
     env_file: ./data_env/mysql.env
