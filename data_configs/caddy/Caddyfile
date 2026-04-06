@@ -1,0 +1,18 @@
+
+matilda.fuzzy76.net {
+    root /var/www/matilda
+    file_server
+}
+
+coduomaps.brothersinarms.no {
+    root /var/www/coduomaps
+    file_server *.pk3
+}
+
+old.brothersinarms.no {
+    root /var/www/bia_old
+}
+
+stats.brothersinarms.no {
+    reverse_proxy http://ultrastats
+}
