@@ -16,17 +16,10 @@ pretty and is full of hacks. Don't judge. :)
 to github because of their nature:
   - `bia_old` - An archive of the old website for the game clan Brothers In Arms.
   - `coduo` - The game folder for the Call of Duty : United Offensive server.
-  - `thelounge` - All data for thelounge. I just migrate the entire folder.
   - `ultrastats` - A _really_ old statistics software for Call of Duty. Version 0.3.16.
 
 `prod.env` is a docker environment file. Variables are:
   - `mysql_root_password`
-
-## Service: certbot
-
-Software: https://certbot.eff.org
-Documentation: https://certbot.eff.org/docs/using.html
-Image: https://hub.docker.com/r/certbot/certbot
 
 ## Service: coduo
 
@@ -81,20 +74,6 @@ cd /coduo/
 ./coduo_lnxded +set gamestartup \"`date +"%D %T"`\" +set com_hunkmegs 512 +set fs_homepath /coduo +set fs_game BrothersInArms_mod +set dedicated 2 +exec awe.cfg +exec dedicateduo.cfg +set net_port 28960
 ```
 
-## Service: csgo
-
-Software: http://blog.counter-strike.net/ 
-Docker image: https://github.com/CM2Walki/CSGO
-
-Gameserver for Counter Strike : Global Offensive. Should not need an
-introduction.
-
-Uses an env file for settings. Exposes ports 27015 and 27020 (both tcp and udp).
-Mounts a data_storage folder for game data.
-
-Notes:
-* Edit serverconfig and comment out weird defaults, ESL config and change the Steam group id.
-
 ## Service: mysql
 
 Software: https://www.mysql.com/ 
@@ -102,19 +81,12 @@ Docker image: https://hub.docker.com/_/mysql/
 
 Uses an env file for settings. Mounts a folder for data storage.
 
-## Service: nginx
+## Service: Caddy
 
-Software: https://nginx.org
-Docker image: https://hub.docker.com/_/nginx/
+Software: https://caddyserver.com
+Docker image: https://hub.docker.com/_/caddy/
 
-Mounts a plethora of folders. Exposes port 80 and 443 for HTTP and HTTPS.
-
-## Service: thelounge
-
-Software: https://thelounge.chat
-Docker image: https://hub.docker.com/r/thelounge/thelounge/
-
-Mounts a folder for storage.
+Web server.
 
 ## Service: ultrastats
 
@@ -125,38 +97,10 @@ Duty : United Offensive.
 
 Mounts the log file from coduo and its application files.
 
-
-## TODO
-
-### Før launch
-
-- [x] databasedump fra ultrastats
-- [x] thelounge produksjonsdata
-- [x] Change mounts to volumes
-- [x] certbot stuff
-
-### Etter launch
-
-- [x] csgo (starter ikke)
-- [x] coduomaps (filer laster ikke)
-- [x] stats.bia.no (white page of death)
-- [x] old.bia.no (http istedenfor https på stilark tipper jeg)
-
-- [x] ultrastats crontab `0 5 * * * /home/bia/ultrastats/ultrastats-0.3.16/src/contrib/bia_runparser.sh >> /tmp/ultrastats.log 2>&1`
-- [x] coduo crontab restart
-- [x] Se om noe fra matilda.fuzzy76.net/~fuzzy76/ skal over
-- [ ] crontab certbot renew
-- [x] Test nedlasting av maps i coduo (test også nedlasting av config)
-- [x] Test serveren med en ren ip-request
-- [x] git commit og push
-
-
----
-
+# Reminders
+* mysql imports an ultrastats dump on first start. Put it correctly when moving or setting up again from scratch
+* crontab:
 ```
-docker-compose run certbot certonly --webroot -w /var/www/bia_old -d old.brothersinarms.no 
-docker-compose run certbot certonly --webroot -w /var/www/chat -d chat.fuzzy76.net
-docker-compose run certbot certonly --webroot -w /var/www/matilda -d matilda.fuzzy76.net
-docker-compose run certbot certonly --webroot -w /var/www/bia_stats -d stats.brothersinarms.no
-docker-compose restart nginx
+2 5 * * * /usr/local/bin/docker-compose -f /home/fuzzy76/server/docker-compose.yml restart coduo >/dev/null
+15 5 * * * /usr/local/bin/docker-compose -f /home/fuzzy76/server/docker-compose.yml exec -T ultrastats /var/www/html/contrib/bia_runparser.sh 2>&1
 ```
