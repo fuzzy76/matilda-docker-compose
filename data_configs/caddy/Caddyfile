@@ -4,9 +4,9 @@ matilda.fuzzy76.net {
     file_server
 }
 
-@pk3 path *.pk3
 
 coduomaps.brothersinarms.no {
+    @pk3 path *.pk3
     root /var/www/coduomaps
     file_server @pk3
 }
