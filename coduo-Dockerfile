@@ -1,4 +1,4 @@
-FROM --platform=i386 debian:stable-slim
+FROM --platform=i386 debian:bookworm-slim
 RUN apt-get update && apt-get install -y libstdc++5
 CMD mkdir /coduo
 EXPOSE 28960/tcp
