@@ -46,15 +46,20 @@ services:
 
   caddy:
     image: caddy:2
+    cap_add:
+      - NET_ADMIN
     ports:
       - "80:80"
       - "443:443"
+      - "443:443/UDP"
     restart: unless-stopped
     volumes:
       - "./data_configs/caddy:/etc/caddy"
       - "./data_seeded/coduo/:/var/www/coduomaps/"
       - "./data_seeded/bia_old/:/var/www/bia_old/"
       - "./data_seeded/caddyroots/matilda:/var/www/matilda/"
+      - caddy_data:/data
+      - caddy_config:/config
 
   ultrastats:
     depends_on: 
@@ -67,3 +72,5 @@ services:
 
 volumes:
   mysql_data:
+  caddy_data:
+  caddy_config:
