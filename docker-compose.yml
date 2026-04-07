@@ -46,6 +46,9 @@ services:
 
   caddy:
     image: caddy:2
+    dns:
+      - 185.114.57.57
+      - 185.114.57.157
     cap_add:
       - NET_ADMIN
     ports:
