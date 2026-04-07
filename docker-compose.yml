@@ -46,9 +46,6 @@ services:
 
   caddy:
     image: caddy:2
-    dns:
-      - 185.114.57.57
-      - 185.114.57.157
     cap_add:
       - NET_ADMIN
     ports:
@@ -57,12 +54,12 @@ services:
       - "443:443/UDP"
     restart: unless-stopped
     volumes:
+      - caddy_data:/data
+      - caddy_config:/config
       - "./data_configs/caddy:/etc/caddy"
       - "./data_seeded/coduo/:/var/www/coduomaps/"
       - "./data_seeded/bia_old/:/var/www/bia_old/"
       - "./data_seeded/caddyroots/matilda:/var/www/matilda/"
-      - caddy_data:/data
-      - caddy_config:/config
 
   ultrastats:
     depends_on: 
