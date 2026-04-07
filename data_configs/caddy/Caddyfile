@@ -1,9 +1,7 @@
-
 matilda.fuzzy76.net {
     root /var/www/matilda
     file_server
 }
-
 
 coduomaps.brothersinarms.no {
     @pk3 path *.pk3
