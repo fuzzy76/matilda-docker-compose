@@ -7,10 +7,13 @@ matilda.fuzzy76.net {
     file_server
 }
 
-coduomaps.brothersinarms.no {
+http://coduomaps.brothersinarms.no {
     @pk3 path *.pk3
     root /var/www/coduomaps
-    file_server @pk3
+    handle @pk3 {
+        file_server @pk3
+    }
+    error 404
 }
 
 old.brothersinarms.no {
