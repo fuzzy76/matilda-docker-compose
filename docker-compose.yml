@@ -7,30 +7,12 @@ services:
       dockerfile: coduo-Dockerfile
     container_name: coduo
     ports:
-      - target: 28960
-        published: 28960
-        protocol: tcp
-        mode: host
-      - target: 20500
-        published: 20500
-        protocol: udp
-        mode: host
-      - target: 20510
-        published: 20510
-        protocol: udp
-        mode: host
-      - target: 20600
-        published: 20600
-        protocol: udp
-        mode: host
-      - target: 20610
-        published: 20610
-        protocol: udp
-        mode: host
-      - target: 28960
-        published: 28960
-        protocol: udp
-        mode: host
+      - "28960:28960"
+      - "28960:28960/UDP"
+      - "20500:20500/UDP"
+      - "20510:20510/UDP"
+      - "20600:20600/UDP"
+      - "20610:20610/UDP"
     restart: unless-stopped
     volumes:
       - "./data_seeded/coduo:/coduo"
